@@ -104,7 +104,6 @@ static int __init pwm_init(void)
     *(gpio+1) &= ~(7 << 24);
     *(gpio+1) |= (2 << 24);
 
-    set_rotation(GPIO_PWM_CW);
     set_divisor(1);
     set_duty_cycle(0);
     set_mode(PWMMODE);
@@ -112,7 +111,7 @@ static int __init pwm_init(void)
     gpio_request(GPIO_PWM_ROTATE_PIN, "sysfs");
     gpio_direction_output(GPIO_PWM_ROTATE_PIN, OUTPUT);
     gpio_export(GPIO_PWM_ROTATE_PIN, false);
-    gpio_set_value(GPIO_PWM_ROTATE_PIN, GPIO_PWM_CW);
+    set_rotation(GPIO_PWM_CW);
 
     printk(KERN_INFO "PWM: Initializing done!\n");
     return 0;
